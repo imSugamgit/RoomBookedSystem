@@ -1,0 +1,182 @@
+﻿@model RoomModel.Src.ViewModel.InvoiceViewModel
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Create"; }
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div style="text-align:left">
+                <button class="btn btn-success" data-toggle="modal" InvoiceId="0" data-target="#myModal"><i class="ti-plus"></i> Create New</button>
+            </div>
+            <hr />
+            <div class="table-responsive">
+                <div class="tableFixHead">
+                    <table class="table table-bordered">
+                        <thead style="background-color: #448aff;">
+                            <tr>
+                                <th>
+                                    InvoiceId
+                                </th>
+                                <th>
+                                    ReservationId
+                                </th>
+                                <th>
+                                    RoomCharge
+                                </th>
+                                <th>
+                                    AdditionalCharges
+                                </th>
+                                <th>
+                                    TaxAmount
+                                </th>
+                                <th>
+                                    TotalAmount
+                                </th>
+                                <th>
+                                    IssueDate
+                                </th>
+
+
+
+
+
+                                <th style="text-align:center">
+                                    Action Name
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Invoices)
+                            {
+                            <tr>
+                                <td>
+                                    @item.InvoiceId
+                                </td>
+                                <td>
+                                    @item.ReservationId
+                                </td>
+                                <td>
+                                    @item.RoomCharge
+                                </td>
+                                <td>
+                                    @item.AdditionalCharges
+                                </td>
+                                <td>
+                                    @item.TaxAmount
+                                </td>
+                                <td>
+                                    @item.TotalAmount
+                                </td>
+                                <td>
+                                    @item.IssueDate
+                                </td>
+                               
+
+                                <td style="text-align:center">
+                                    <div class="btn-group-sm">
+                                        <a type="button" class=" btn btn-secondary" href="#!" ReferenceType="Crud" data-toggle="modal" InvoiceId="@item.Id" data-target="#myModal"><i class="ti-pencil-alt" data-toggle="tooltip" title="Edit"></i></a>
+                                        <a type="button" class=" btn btn-danger" href="#!" data-toggle="modal" InvoiceId="@item.Id" data-target="#myModal"><i class="ti-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" id="DeleteBody">
+
+        <!-- /.modal-content -->
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+@section Scripts
+{
+    <script type="text/javascript">
+        $("#myModal").on('show.bs.modal', function (e) {
+            const InvoiceId = $(e.relatedTarget).attr('InvoiceId');
+            const type = $(e.relatedTarget).attr('ReferenceType');
+
+            if (ProvienceId > 0) {
+                if (type == null) {
+                    var url = '@Url.Action("Delete", "Invoice")' + "?id=" + InvoiceId;
+                    $("#DeleteBody").load(url, function () {
+
+                        $("#myModal").modal('show');
+                    });
+                }
+                else {
+                    var url = '@Url.Action("Update", "Invoice")' + "?id=" + InvoiceId;
+                    $("#DeleteBody").load(url, function () {
+
+                        $("#myModal").modal('show');
+                    });
+                }
+            }
+            else {
+                var url = '@Url.Action("Create", "Invoice")';
+                $("#DeleteBody").load(url, function () {
+
+                    $("#myModal").modal('show');
+                });
+            }
+        })
+    </script>
+
+    @if (ViewBag.Message != null)
+    {
+<script type="text/javascript">
+    'use strict';
+    $(window).on('load', function () {
+        function notify(message,type) {
+            $.growl({
+                message: message
+            }, {
+                type: type,
+                allow_dismiss: false,
+                label: 'Cancel',
+                className: 'btn-xs btn-inverse',
+                placement: {from: 'top', align: 'right'},
+                delay: 2500,
+                animate: { enter: 'animated rotateIn', exit: 'animated rotateIn'},
+                offset: {x: 30,y: 30}
+            });
+        };
+        notify('@ViewBag.Message','success');
+    });
+</script>
+}
+
+
+
+    @if (ViewBag.Messege != null)
+    {
+<script type="text/javascript">
+    'use strict';
+    $(window).on('load', function () {
+        function notify(messege,type) {
+            $.growl({
+                message: messege
+            }, {
+                type: type,
+                allow_dismiss: false,
+                label: 'Cancel',
+                className: 'btn-xs btn-inverse',
+                placement: {from: 'top', align: 'right'},
+                delay: 2500,
+                animate: { enter: 'animated rotateIn', exit: 'animated rotateIn'},
+                offset: {x: 30,y: 30}
+            });
+        };
+        notify('@ViewBag.Messege','danger');
+    });
+</script>
+}
+}
