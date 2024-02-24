@@ -1,0 +1,161 @@
+﻿@model RoomModel.Src.ViewModel.CustomerViewModel
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Create"; }
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div style="text-align:left">
+                <button class="btn btn-success" data-toggle="modal" CartId="0" data-target="#myModal"><i class="ti-plus"></i> Create New</button>
+            </div>
+            <hr />
+            <div class="table-responsive">
+                <div class="tableFixHead">
+                    <table class="table table-bordered">
+                        <thead style="background-color: #448aff;">
+                            <tr>
+                                <th>
+                                   ID Card Number
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    City
+                                </th>
+                                <th>Pincode</th>
+                                <th>Email</th>
+                                <th>Contact Number</th>
+
+
+                                <th style="text-align:center">
+                                    Action Name
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Customers)
+                            {
+                <tr>
+                    <td>
+                        @item.IdCardNumber
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.City
+                    </td>
+                    <td>
+                        @item.Pincode
+                    </td>
+                    <td>@item.Email</td>
+                    <td>@item.ContactNumber</td>
+                    <td style="text-align:center">
+                        <div class="btn-group-sm">
+                            <a type="button" class=" btn btn-secondary" href="#!" ReferenceType="Crud" data-toggle="modal" CustomerId="@item.Id" data-target="#myModal"><i class="ti-pencil-alt" data-toggle="tooltip" title="Edit"></i></a>
+                            <a type="button" class=" btn btn-danger" href="#!" data-toggle="modal" CustomerId="@item.Id" data-target="#myModal"><i class="ti-trash"></i></a>
+                        </div>
+                    </td>
+                </tr>
+}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" id="DeleteBody">
+
+        <!-- /.modal-content -->
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+@section Scripts
+{
+    <script type="text/javascript">
+        $("#myModal").on('show.bs.modal', function (e) {
+            const CustomerId = $(e.relatedTarget).attr('CustomerId');
+            const type = $(e.relatedTarget).attr('ReferenceType');
+
+            if (ProvienceId > 0) {
+                if (type == null) {
+                    var url = '@Url.Action("Delete", "Customer")' + "?id=" + CustomerId;
+                    $("#DeleteBody").load(url, function () {
+
+                        $("#myModal").modal('show');
+                    });
+                }
+                else {
+                    var url = '@Url.Action("Update", "Customer")' + "?id=" + CustomerId;
+                    $("#DeleteBody").load(url, function () {
+
+                        $("#myModal").modal('show');
+                    });
+                }
+            }
+            else {
+                var url = '@Url.Action("Create", "Customer")';
+                $("#DeleteBody").load(url, function () {
+
+                    $("#myModal").modal('show');
+                });
+            }
+        })
+    </script>
+
+    @if (ViewBag.Message != null)
+    {
+<script type="text/javascript">
+    'use strict';
+    $(window).on('load', function () {
+        function notify(message,type) {
+            $.growl({
+                message: message
+            }, {
+                type: type,
+                allow_dismiss: false,
+                label: 'Cancel',
+                className: 'btn-xs btn-inverse',
+                placement: {from: 'top', align: 'right'},
+                delay: 2500,
+                animate: { enter: 'animated rotateIn', exit: 'animated rotateIn'},
+                offset: {x: 30,y: 30}
+            });
+        };
+        notify('@ViewBag.Message','success');
+    });
+</script>
+}
+
+
+
+    @if (ViewBag.Messege != null)
+    {
+<script type="text/javascript">
+    'use strict';
+    $(window).on('load', function () {
+        function notify(messege,type) {
+            $.growl({
+                message: messege
+            }, {
+                type: type,
+                allow_dismiss: false,
+                label: 'Cancel',
+                className: 'btn-xs btn-inverse',
+                placement: {from: 'top', align: 'right'},
+                delay: 2500,
+                animate: { enter: 'animated rotateIn', exit: 'animated rotateIn'},
+                offset: {x: 30,y: 30}
+            });
+        };
+        notify('@ViewBag.Messege','danger');
+    });
+</script>
+}
+}

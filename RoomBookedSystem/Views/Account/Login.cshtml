@@ -1,0 +1,140 @@
+﻿@model RoomUser.Src.ViewModel.AccountViewModel.LoginViewModel
+
+@{
+
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<!-- Mirrored from themesbrand.com/skote-mvc/layouts/auth-login-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Dec 2021 23:35:51 GMT -->
+<head>
+    <meta charset="utf-8" />
+    <title>Room Booked System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- owl.carousel css -->
+    <link href="/Template/assets/libs/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/Template/assets/libs/owl.carousel/assets/owl.theme.default.min.css">
+
+    <!-- Bootstrap Css -->
+    <link href="/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+</head>
+<body class="auth-body-bg">
+    <div>
+        <div class="container-fluid p-0">
+            <div class="row g-0">
+                <div class="col-xl-8  justify-content-center" style="vertical-align: bottom; background-size: cover; height: 100%; background-image: url(login3.jpg); filter: brightness(25%); position: fixed; width: -webkit-fill-available; ">
+                </div>
+
+                <div class="col-xl-4">
+                    <div class="auth-full-page-content p-md-5 p-4">
+                        <div class="w-200">
+                            <center><img src="~/logo.jpg" alt="" style="height:150px;width:150px;border-radius: 98%;margin-left: 538px;margin-bottom:13px;" /></center>
+
+                            <center> <h5 class="caption-title" style="text-align: center; margin-left: 539px; color: white "><b>Room</b><br />Booking System</h5></center>
+                            <div class="d-flex flex-column h-100" style="width:fit-content;position: fixed;margin-left: 500px;">
+                                <div class="mt-4">
+
+                                    <form class="form-horizontal form-material" id="loginform" asp-action="Login" asp-controller="Account">
+
+                                        <div class="mb-3">
+                                            <label for="username" class="form-label">Username</label>
+                                            <input type="text" asp-for="UserName" id="username" autocomplete="off" required="" class="form-control" placeholder="UserName">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Password</label>
+                                            <div class="input-group auth-pass-inputgroup">
+                                                <input type="password" asp-for="Password" autocomplete="off" required="" class="form-control" placeholder="Password">
+
+                                                <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
+                                            </div>
+                                        </div>
+                                        @Html.ValidationMessage("CustomError", null, new { @class = "text-danger" })
+                                        <label style="color:white;font-weight:lighter;">
+                                            <input type="checkbox" class="i-checks" id="remember_me"> Remember me
+                                        </label>
+                                        <div class="mt-3 d-grid">
+                                            <button class="btn btn-primary waves-effect waves-light" type="submit">Log In</button>
+
+                                            <br />
+                                            <p class="mb-2 text-muted">Forgot password? <a asp-action="RecoveryPassword" asp-controller="Account" class="f-w-400">Reset</a></p>
+                                        </div>
+                                    </form>
+                                    <p class="mb-0" style="color:#ffffff">
+                                        ©
+                                        Developed By IT Students.<br />
+                                        <h7 style="color:#ffffff">Mechinagar-10,Dhulabari Jhapa Nepal.</h7>
+                                    </p>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end col -->
+            <!-- end row -->
+        </div>
+        <!-- end container-fluid -->
+    </div>
+
+    <!-- JAVASCRIPT -->
+
+    <script src="/assets/libs/jquery/jquery.min.js"></script>
+    <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="/assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="/assets/libs/node-waves/waves.min.js"></script>
+
+    <!-- owl.carousel js -->
+    <script src="/assets/libs/owl.carousel/owl.carousel.min.js"></script>
+
+    <!-- auth-2-carousel init -->
+    <script src="/assets/js/pages/auth-2-carousel.init.js"></script>
+
+    <!-- App js -->
+    <script src="/assets/js/app.js"></script>
+
+</body>
+
+<!-- Mirrored from themesbrand.com/skote-mvc/layouts/auth-login-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Dec 2021 23:35:51 GMT -->
+</html>
+
+<script type="text/javascript">
+    $(function () {
+        if (localStorage.chkbx && localStorage.chkbx != '') {
+            $('#remember_me').attr('checked', 'checked');
+            $('#username').val(localStorage.usrname);
+            $('#password').val(localStorage.pass);
+        }
+        else {
+            $('#remember_me').removeAttr('checked');
+            $('#username').val('');
+            $('#password').val('');
+        }
+        $('#remember_me').click(function () {
+            if ($('#remember_me').is(':checked')) {
+                // save username and password
+                localStorage.usrname = $('#username').val();
+                localStorage.pass = $('#password').val();
+                localStorage.chkbx = $('#remember_me').val();
+            } else {
+                localStorage.usrname = '';
+                localStorage.pass = '';
+                localStorage.chkbx = '';
+            }
+        });
+    });
+</script>

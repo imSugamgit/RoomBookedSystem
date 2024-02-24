@@ -1,0 +1,77 @@
+﻿@model RoomUser.Src.ViewModel.AccountViewModel.RegisterViewModel
+@{ Layout = null; }
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Room Booked System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="Codedthemes" />
+
+    <link rel="icon" href="~/default/assets/images/favicon.ico" type="image/x-icon">
+    <link href="~/default/assets/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    <form class="form-horizontal form-material" id="loginform" asp-action="Register" asp-controller="Account">
+        <div class="auth-wrapper">
+            <div class="auth-content">
+                <div class="card">
+                    <div class="row align-items-center text-center">
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <img src="assets/images/logo-dark.png" alt="" class="img-fluid mb-4">
+                                <h4 class="mb-3 f-w-400">Sign up</h4>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="feather icon-user"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" asp-for="UserName" required="" placeholder="Username">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="feather icon-mail"></i></span>
+                                    </div>
+                                    <input type="email" class="form-control" asp-for="Email" required"" placeholder="Email address">
+                                </div>
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="feather icon-lock"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control" asp-for="Password" required="" placeholder="Password">
+                                </div>
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="feather icon-lock"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control" asp-for="ConfirmPassword" required="" placeholder="Password">
+                                </div>
+                                @*<div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="feather icon-lock"></i></span>
+                                        </div>
+                                        <select asp-for="BranchId" asp-items="Model.BranchList" class="select2 custom-select form-control">
+                                            <option value="SuperAdmin">--Select Branch--</option>
+                                        </select>
+                                    </div>*@
+
+                                <button class="btn btn-primary btn-block mb-4">Sign up</button>
+                                <p class="mb-2">Already have an account? <a href="@Url.Action("Login","Account")" class="f-w-400">Signin</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+
+<!-- Mirrored from codedthemes.com/demos/admin-templates/gradient-able/bootstrap/default/auth-signup.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 23 Nov 2021 06:43:51 GMT -->
+</html>
+<script src="~/default/assets/js/vendor-all.min.js"></script>
+<script src="~/default/assets/js/plugins/bootstrap.min.js"></script>
+<script src="~/default/assets/js/waves.min.js"></script>

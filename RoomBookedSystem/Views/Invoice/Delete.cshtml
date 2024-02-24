@@ -1,0 +1,22 @@
+﻿@model RoomMainSetup.Entity.RoomModel.Invoice
+
+@{ Layout = null; }
+
+<form asp-action="DeleteConfirmed" asp-controller="Invoice">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Id)
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">@Model.Id</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="ti-close"></i></span></button>
+        </div>
+        <div class="modal-body">
+            <p style="font-family:Calibri">Are You Sure to Delete @Model.Id?</p>
+        </div>
+        <div class="modal-footer">
+            <div class="btn-group-sm">
+                <button type="submit" class="btn  btn-danger"><i class="ti-trash"></i> Delete Confirm</button>
+            </div>
+        </div>
+    </div>
+</form>
