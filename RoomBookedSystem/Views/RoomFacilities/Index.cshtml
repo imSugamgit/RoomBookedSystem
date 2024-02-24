@@ -1,0 +1,121 @@
+﻿
+@model RoomModel.Src.ViewModel.RoomFacilitiesViewModel
+@{
+    ViewBag.Title = "Index";
+    int SN = 1;
+}
+
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-body">
+            <div style="text-align:left">
+                <a class="btn waves-effect waves-light btn-rounded btn-success" type="button" asp-action="Create" asp-controller="RoomFacilities"><i class="ti-plus"></i> Create New</a>
+            </div> <hr />
+            <div class="table-responsive">
+                <div class="tableFixHead">
+                    <table class="table table-bordered">
+                        <thead style="background-color: #448aff;">
+                            <tr>
+                                <th>SN</th>
+                                <th>
+                                    RoomFacilitiesId
+                                </th>
+                                <th>
+                                   Name
+                                </th>
+                                
+
+                                <th style="text-align:center">
+                                    Action Name
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.RoomFacilitiess)
+                            {
+                                <tr>
+                                    <td>
+                                        @SN
+                                    </td>
+                                    
+                                        
+                                    <td>
+                                        @*@item.RoomPicture*@
+                                    </td>
+                                    <td style="text-align:center">
+                                        <div class="overlay-edit">
+                                            <a type="button" class="btn-sm btn-icon btn-secondary" asp-action="Update" asp-controller="RoomFacilities" asp-route-id="@item.Id">
+                                                <i class="ti-pencil-alt"></i>
+                                            </a>
+
+                                            <a type="button" class="btn-sm btn-icon btn-danger" href="#!" data-toggle="modal" RoomId="@item.Id" data-target="#myModal"><i class="ti-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                SN++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" id="DeleteBody">
+
+        <!-- /.modal-content -->
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+@section Scripts
+    {
+    <script type="text/javascript">
+            $("#myModal").on('show.bs.modal', function (ke
+            ) {
+                const roomfacilitiesId= $(ke.relatedTarget).attr('RoomFacilitiesId');
+
+                var url = '@Url.Action("Delete","Room")' + "?id=" + roomfacilitiesId;
+                if (branchId > 0) {
+                $("#DeleteBody").load(url, function () {
+
+                    $("#myModal").modal('show');
+                });
+            }
+            else {
+                $("#myModal").modal('hide');
+            }
+        })
+    </script>
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+    'use strict';
+    $(window).on('load', function () {
+        //Welcome Message (not for login page)
+        function notify(message, type) {
+            $.growl({
+                message: message
+            }, {
+                type: type,
+                allow_dismiss: false,
+                label: 'Cancel',
+                className: 'btn-xs btn-inverse',
+                placement: { from: 'top', align: 'right' },
+                delay: 2500,
+                animate: { enter: 'animated fadeInRight', exit: 'animated fadeOutRight' },
+                offset: { x: 30, y: 30 }
+            });
+        };
+        notify('@ViewBag.Message', 'info');
+    });
+    </script>
+}
+

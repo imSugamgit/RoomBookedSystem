@@ -1,0 +1,103 @@
+﻿@model RoomModel.Src.Dto.FacilitiesDto
+@{
+    Layout = null;
+    ViewBag.Title = "Create";
+}
+
+<form asp-action="Create" asp-controller="Facilities" method="post" id="messageModal" class="frmValidation" novalidate>
+    @Html.AntiForgeryToken()
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">New Facilities</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="FacilitiesId">FacilitiesId<span style="color:red">*</span></label><br />
+                        <input type="text" asp-for="FacilitiesId" class="form-control" id="FacilitiesId" autocomplete="off" required />
+                        <div class="invalid-feedback">
+                            Please Enter A FacilitiesId.
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="ToDate">Title<span style="color:red">*</span></label><br />
+                        <input type="text" asp-for="Title" class="form-control" id="Title" autocomplete="off" required />
+                        <div class="invalid-feedback">
+                            Please Enter A To Title.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="Servicecharge">Servicecharge<span style="color:red">*</span></label><br />
+                        <input type="text" asp-for="Servicecharge" class="form-control" id="Servicecharge" autocomplete="off" required />
+                        <div class="invalid-feedback">
+                            Please Enter A Servicecharge.
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="submit" id="btnSubmit" class="btn  btn-success"><i class="feather icon-check-square"></i> Submit</button>
+            <button type="button" class="btn  btn-secondary" data-dismiss="modal">&times; Cancel</button>
+        </div>
+    </div>
+</form>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+    'use strict';
+    $(window).on('load', function () {
+        function notify(message) {
+            $.notify({
+                message: message,
+                type: 'danger',
+                allow_dismiss: false,
+                label: 'Cancel',
+                className: 'btn-xs btn-danger',
+                placement: { from: 'bottom', align: 'right' },
+                delay: 2500,
+                animate: { enter: 'animated fadeInRight', exit: 'animated fadeOutRight' },
+                offset: { x: 30, y: 30 }
+            });
+        };
+        /**/
+        notify('@ViewBag.Message');
+    /**/
+    });
+    </script>
+}
+
+
+<script type="text/javascript">
+    $(function () {
+        Array.prototype.filter.call($('.frmValidation'), function (form) {
+            $('#btnSubmit').click(function () {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    form.classList.add('was-validated');
+                    return false;
+                }
+                else {
+                    return true;
+                }
+
+
+            });
+        });
+    });
+
+</script>
+
+
+
