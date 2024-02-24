@@ -1,0 +1,108 @@
+﻿@model RoomModel.Src.Dto.CartDto
+@{
+    Layout = null;
+    ViewBag.Title = "Create";
+}
+
+<form asp-action="Update" asp-controller="Cart" method="post" id="messageModal" class="frmValidation" novalidate>
+    @Html.AntiForgeryToken()
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">New Cart</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="FromDate">FromDate<span style="color:red">*</span></label><br />
+                        <input type="text" asp-for="FromDate" class="form-control" id="FromDate" autocomplete="off" required />
+                        <div class="invalid-feedback">
+                            Please Enter A From Date.
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="ToDate">ToDate<span style="color:red">*</span></label><br />
+                        <input type="text" asp-for="ToDate" class="form-control" id="ToDate" autocomplete="off" required />
+                        <div class="invalid-feedback">
+                            Please Enter A To Date.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="TotalDays">TotalDays<span style="color:red">*</span></label><br />
+                        <input type="text" asp-for="TotalDays" class="form-control" id="TotalDays" autocomplete="off" required />
+                        <div class="invalid-feedback">
+                            Please Enter A TotalDays.
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="TotalPrice">TotalPrice <span style="color:red">*</span></label><br />
+                        <input type="text" asp-for="TotalPrice" class="form-control" id="TotalPrice" autocomplete="off" required />
+                        <div class="invalid-feedback">
+                            Please Enter A TotalPrice.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" id="btnSubmit" class="btn  btn-success"><i class="feather icon-check-square"></i> Submit</button>
+            <button type="button" class="btn  btn-secondary" data-dismiss="modal">&times; Cancel</button>
+        </div>
+    </div>
+</form>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+    'use strict';
+    $(window).on('load', function () {
+        function notify(message) {
+            $.notify({
+                message: message,
+                type: 'danger',
+                allow_dismiss: false,
+                label: 'Cancel',
+                className: 'btn-xs btn-danger',
+                placement: { from: 'bottom', align: 'right' },
+                delay: 2500,
+                animate: { enter: 'animated fadeInRight', exit: 'animated fadeOutRight' },
+                offset: { x: 30, y: 30 }
+            });
+        };
+        /**/
+        notify('@ViewBag.Message');
+    /**/
+    });
+    </script>
+}
+
+
+<script type="text/javascript">
+    $(function () {
+        Array.prototype.filter.call($('.frmValidation'), function (form) {
+            $('#btnSubmit').click(function () {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    form.classList.add('was-validated');
+                    return false;
+                }
+                else {
+                    return true;
+                }
+
+
+            });
+        });
+    });
+
+</script>
+
+
+

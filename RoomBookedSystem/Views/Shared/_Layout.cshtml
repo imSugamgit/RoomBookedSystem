@@ -1,0 +1,653 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@inject Microsoft.AspNetCore.Identity.UserManager<RoomMainSetup.Data.ApplicationUser> _userManager;
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@*@using RoomUser.Constants*@
+@using RoomUser.Seeds
+@{
+    //CheckRole check = new CheckRole();
+    //var currentUser = await _userManager.GetUserAsync(User);
+    //var userRoles = await _userManager.GetRolesAsync(currentUser);
+    //var roleName = userRoles.FirstOrDefault();
+}
+
+<!-- Mirrored from html.phoenixcoded.net/mega-able/default/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Aug 2021 08:18:11 GMT -->
+<head>
+    <title></title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Gradient Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+    <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
+    <meta name="author" content="Phoenixcoded" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="http://html.phoenixcoded.net/mega-able/files/assets/images/favicon.ico" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <!-- waves.css -->
+    <link href="~/Community/html.phoenixcoded.net/mega-able/files/assets/pages/waves/css/waves.min.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Required Fremwork -->
+    <link href="~/Community/html.phoenixcoded.net/mega-able/files/bower_components/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <!-- waves.css -->
+    <link rel="stylesheet" href="~/Community/html.phoenixcoded.net/mega-able/files/assets/pages/waves/css/waves.min.css" type="text/css" media="all">
+    <!-- themify icon -->
+    <link rel="stylesheet" type="text/css" href="~/Community/html.phoenixcoded.net/mega-able/files/assets/icon/themify-icons/themify-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="~/Community/html.phoenixcoded.net/mega-able/files/assets/icon/font-awesome/css/font-awesome.min.css">
+    <!-- scrollbar.css -->
+    <link rel="stylesheet" type="text/css" href="~/Community/html.phoenixcoded.net/mega-able/files/assets/css/jquery.mCustomScrollbar.css">
+    <!-- am chart export.css -->
+    <link href="~/Community/www.amcharts.com/lib/3/plugins/export/export.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- radial chart.css -->
+    <link rel="stylesheet" href="~/Community/html.phoenixcoded.net/mega-able/files/assets/pages/chart/radial/css/radial.css" type="text/css" media="all">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="~/Community/html.phoenixcoded.net/mega-able/files/assets/css/style.css">
+    <link href="~/Community/html.phoenixcoded.net/mega-able/files/assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/bootstrap-select/bootstrap-select.min.css" />
+    <link href="~/nepali.datepicker.v3.6 (1)/css/nepali.datepicker.v3.6.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/select2/dist/css/select2.min.css" />
+    <!-- Datatable -->
+    <!-- Data Table Css -->
+    <link rel="stylesheet" type="text/css" href="~/Community/html.phoenixcoded.net/mega-able/files/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Community/html.phoenixcoded.net/mega-able/files/assets/pages/data-table/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Community/html.phoenixcoded.net/mega-able/files/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css">
+
+    @* <link href="~/multiselect/css/multi-select.css" rel="stylesheet" />
+        <link href="~/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />*@
+
+    <style>
+        .invalid input:required:invalid {
+            background: #BE4C54;
+        }
+
+        .invalid input:required:valid {
+            background: #17D654;
+        }
+
+        .form-control {
+            border: 1px solid black;
+    
+
+        .center-div {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -150px;
+            margin-top: -150px;
+        }
+
+        .spinner {
+            position: fixed;
+            z-index: 999;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: Black;
+            filter: alpha(opacity=60);
+            opacity: 0.6;
+            -moz-opacity: 0.8;
+        }
+
+        .loader {
+            margin: auto;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #15a0ec;
+            border-bottom: 16px solid #15a0ec;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        .inner-div {
+            background-color: white;
+            border-radius: 15px;
+            margin: auto;
+            padding: 2%;
+            width: 150px;
+        }
+
+        @@-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @@keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        /* [class*=sidebar-dark-] .sidebar a {
+            color: #ffffff;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+            table thead tr th {
+                border-bottom: 1px solid #000000;
+            }
+
+           table th, table td {
+                border-left: 1px solid rgba(0,0,0,0.2);
+                border-right: 1px solid rgba(0,0,0,0.2);
+            }
+
+            table th, table td {
+                padding: 4px 8px;
+            }*/
+    </style>
+</head>
+
+<body>
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+        <div class="loader-track">
+            <div class="preloader-wrapper">
+                <div class="spinner-layer spinner-blue">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+                <div class="spinner-layer spinner-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+
+                <div class="spinner-layer spinner-yellow">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+
+                <div class="spinner-layer spinner-green">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Pre-loader end -->
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+            <nav class="navbar header-navbar pcoded-header">
+                <div class="navbar-wrapper">
+                    <div class="navbar-logo">
+                        <img src="~/3.png" style="height:53px;width:60px;border-radius:50%;" /><br />
+                        <p style="color: white; font-family: Times New Roman, Times, serif; margin-top: 55px"><b style="font-size:13px;">&nbsp;&nbsp;Room Reservation System </b><br /><br /> <br /> </p>
+                        <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
+                            <i class="ti-menu"></i>
+                        </a>
+                        <div class="mobile-search waves-effect waves-light">
+                            <div class="header-search">
+                                <div class="main-search morphsearch-search">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend search-close"><i class="ti-close input-group-text"></i></span>
+                                        <input type="text" class="form-control" placeholder="Enter Keyword">
+                                        <span class="input-group-append search-btn"><i class="ti-search input-group-text"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*<a href="index-2.html">
+                                <img class="img-fluid" src="~/Community/html.phoenixcoded.net/mega-able/files/assets/images/logo.png" alt="Theme-Logo" />
+                            </a>*@
+                        <a class="mobile-options waves-effect waves-light">
+                            <i class="ti-more"></i>
+                        </a>
+                    </div>
+
+                    <div class="navbar-container container-fluid">
+                        <ul class="nav-left">
+                            <li>
+                                <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
+                            </li>
+                            @* <li class="header-search" style="font-size:18px;color:white">
+                                    Counter Billing System
+                                </li>*@
+                        </ul>
+                        <ul class="nav-right">
+                            <li class="user-profile header-notification">
+                                <a href="#!" class="waves-effect waves-light">
+                                    <img src="~/User.png" class="img-radius" alt="User-Profile-Image">
+                                    <span>@User.Identity.Name</span>
+                                    <i class="ti-angle-down"></i>
+                                </a>
+                                <ul class="show-notification profile-notification">
+                                    <li class="waves-effect waves-light">
+                                        <a asp-action="Register" asp-controller="Account">
+                                            <i class="ti-layout-sidebar-left"></i> New User
+                                        </a>
+                                    </li>
+                                    <li class="waves-effect waves-light">
+                                        <a asp-action="Login" asp-controller="Account">
+                                            <i class="ti-layout-sidebar-left"></i> Logout
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Sidebar chat start -->
+            <!-- Sidebar inner chat start-->
+            <!-- Sidebar inner chat end-->
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+                    <nav class="pcoded-navbar">
+                        <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+                        <div class="pcoded-inner-navbar main-menu">
+                            <div class="pcoded-navigation-label">Navigation</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a asp-action="Index" asp-controller="Home" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                        <span class="pcoded-mtext">Dashboard</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                            <div class="pcoded-navigation-label">Room Setup</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-receipt"></i><b>W</b></span>
+                                        <span class="pcoded-mtext">Room</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="">
+                                            @*@if ((AuthorizationService.AuthorizeAsync(User, Permissions.ApplicationPermission.Party)).Result.Succeeded)
+                {*@
+                                            <a asp-action="Index" asp-controller="Room" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext">Room</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>@*}*@
+                                        </li>
+                                    </ul>
+                                    <ul class="pcoded-submenu">
+                                        <li class="">
+                                            @*@if ((AuthorizationService.AuthorizeAsync(User, Permissions.ApplicationPermission.Party)).Result.Succeeded)
+                {*@
+                                            <a asp-action="Index" asp-controller="Booking" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext">Booking</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>@*}*@
+                                        </li>
+                                    </ul><ul class="pcoded-submenu">
+                                        <li class="">
+                                            @*@if ((AuthorizationService.AuthorizeAsync(User, Permissions.ApplicationPermission.Party)).Result.Succeeded)
+                {*@
+                                            <a asp-action="Index" asp-controller="Cart" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext">Cart</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>@*}*@
+                                        </li>
+                                    </ul>
+                                    <ul class="pcoded-submenu">
+                                        <li class="">
+                                            @*@if ((AuthorizationService.AuthorizeAsync(User, Permissions.ApplicationPermission.Party)).Result.Succeeded)
+                {*@
+                                            <a asp-action="Index" asp-controller="Customer" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext">Customer</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>@*}*@
+                                        </li>
+                                    </ul>
+                                    <ul class="pcoded-submenu">
+                                        <li class="">
+                                            @*@if ((AuthorizationService.AuthorizeAsync(User, Permissions.ApplicationPermission.Party)).Result.Succeeded)
+                {*@
+                                            <a asp-action="Index" asp-controller="Facilities" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext">Facilities</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>@*}*@
+                                        </li>
+                                    </ul>
+                                    <ul class="pcoded-submenu">
+                                        <li class="">
+                                            @*@if ((AuthorizationService.AuthorizeAsync(User, Permissions.ApplicationPermission.Party)).Result.Succeeded)
+                {*@
+                                            <a asp-action="Index" asp-controller="Invoice" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext">Invoice</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>@*}*@
+                                        </li>
+                                    </ul> <ul class="pcoded-submenu">
+                                        <li class="">
+                                            @*@if ((AuthorizationService.AuthorizeAsync(User, Permissions.ApplicationPermission.Party)).Result.Succeeded)
+                {*@
+                                            <a asp-action="Index" asp-controller="RoomFacilities" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext">RoomFacilities</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>@*}*@
+                                        </li>
+                                    </ul> <ul class="pcoded-submenu">
+                                        <li class="">
+                                            @*@if ((AuthorizationService.AuthorizeAsync(User, Permissions.ApplicationPermission.Party)).Result.Succeeded)
+                {*@
+                                            <a asp-action="Index" asp-controller="RoomType" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext">RoomType</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>@*}*@
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+
+
+
+
+
+                            <div class="pcoded-navigation-label">Reports</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-receipt"></i><b>W</b></span>
+                                        <span class="pcoded-mtext">Reports</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="">
+                                            @*@if ((AuthorizationService.AuthorizeAsync(User, Permissions.ApplicationPermission.BillingReport)).Result.Succeeded)
+                                                {*@
+                                            <a asp-action="RoomReporst" asp-controller="RoomReport" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-receipt"></i></span>
+                                                <span class="pcoded-mtext">RoomReport</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>@*}*@
+                                        </li>
+                                        <li class="">
+                                            @*@if ((AuthorizationService.AuthorizeAsync(User, Permissions.ApplicationPermission.BillingCreditReport)).Result.Succeeded)
+                                                {*@
+                                            <a asp-action="BillingCreditReport" asp-controller="BillingReport" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext">Billing Credit Report</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>@*}*@
+                                        </li>
+                                        <li class=" ">
+                                            <a asp-action="LodgeOrderReports" asp-controller="RoomCheckIn" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext">Lodge Billing Report</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+
+
+                            <div class="pcoded-navigation-label">User Setup</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-user"></i><b>W</b></span>
+                                        <span class="pcoded-mtext">User Setup</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="">
+                                            <a asp-action="Index" asp-controller="Account" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext">User List</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a asp-action="Index" asp-controller="Roles" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext">User Role</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <div class="pcoded-content">
+                        <div class="pcoded-inner-content">
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <div class="page-body">
+                                        @RenderBody()
+                                    </div>
+                                </div>
+                                <div id="styleSelector"> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/bower_components/jquery/js/jquery.min.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/Community/html.phoenixcoded.net/mega-able/files/bower_components/popper.js/js/popper.min.js"></script>
+    <script type="text/javascript" src="~/Community/html.phoenixcoded.net/mega-able/files/bower_components/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/assets/pages/widget/excanvas.js"></script>
+    <!-- waves js -->
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/assets/pages/waves/js/waves.min.js"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="~/Community/html.phoenixcoded.net/mega-able/files/bower_components/jquery-slimscroll/js/jquery.slimscroll.js"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="~/Community/html.phoenixcoded.net/mega-able/files/bower_components/modernizr/js/modernizr.js"></script>
+    <!-- slimscroll js -->
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/assets/js/SmoothScroll.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- Chart js -->
+    <script type="text/javascript" src="~/Community/html.phoenixcoded.net/mega-able/files/bower_components/chart.js/js/Chart.js"></script>
+    <!-- amchart js -->
+    <script src="~/Community/www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/assets/pages/widget/amchart/gauge.min.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/assets/pages/widget/amchart/serial.min.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/assets/pages/widget/amchart/light.min.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/assets/pages/widget/amchart/pie.min.js"></script>
+    <script src="~/Community/www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <!-- Google map js -->
+    <script src="~/Community/developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/assets/pages/google-maps/gmaps.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/assets/js/animation.js"></script>
+    <!-- menu js -->
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/assets/js/pcoded.min.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/assets/js/vertical/vertical-layout.min.js"></script>
+    <!-- custom js -->
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/assets/pages/dashboard/custom-dashboard.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/assets/js/script.js"></script>
+    <script src="~/select2/dist/js/select2.full.min.js"></script>
+    <script src="~/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="~/nepali.datepicker.v3.6 (1)/js/nepali.datepicker.v3.6.min.js"></script>
+    <!-- data-table js -->
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/assets/pages/data-table/js/jszip.min.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/assets/pages/data-table/js/pdfmake.min.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/assets/pages/data-table/js/vfs_fonts.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Community/html.phoenixcoded.net/mega-able/files/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    @* <script type="text/javascript" src="~/Community/html.phoenixcoded.net/mega-able/files/assets/pages/form-validation/validate.js"></script>
+        <!-- Custom js -->
+        <script type="text/javascript" src="~/Community/html.phoenixcoded.net/mega-able/files/assets/pages/form-validation/form-validation.js"></script>*@
+    <script src="~/validation.init.js" type="text/javascript" type="text/javascript"></script>
+    <script src="~/form-validation.init.js"></script>
+    <script src="~/validation.js"></script>>
+</body>
+</html>
+@RenderSection("Scripts", required: false)
+<script>
+    $(document).ready(function () {
+        var mainInput = document.getElementsByClassName("nepali-datepicker");
+        mainInput.nepaliDatePicker({
+            language: "english",
+            ndpYear: true,
+            ndpMonth: true,
+            ndpYearCount: 10
+        });
+    });
+    $('#user-list-table').DataTable();
+
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
+
+    // For select 2
+    $(".select2").select2();
+    $('.selectpicker').selectpicker();
+</script>
+
+@*<script type="text/javascript">
+        $(function () {
+            Array.prototype.filter.call($('.frmValidation'), function (form) {
+                $('#btnSubmit').click(function () {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        form.classList.add('was-validated');
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+
+
+                });
+            });
+        });
+
+    </script>*@
+@*<script type="text/javascript">
+        $(function () {
+
+            // responsive table
+            $('#config-table').DataTable({
+                order: false,
+                columnDefs: [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }]
+            });
+        });
+    </script>*@
+
+@*<script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>*@
+@*<script>
+         $(function() {
+         $("form").validate();
+         $( "form" ).on( "submit", function(e) {
+
+        var dataString = $(this).serialize();
+
+        // alert(dataString); return false;
+
+        $.ajax({
+          type: "POST",
+          url: "bin/process.php",
+          data: dataString,
+          success: function () {
+            $("#contact_form").html("<div id='message'></div>");
+            $("#message")
+              .html("<h2>Contact Form Submitted!</h2>")
+              .append("<p>We will be in touch soon.</p>")
+              .hide()
+              .fadeIn(1500, function () {
+                $("#message").append(
+                  "<img id='checkmark' src='images/check.png' />"
+                );
+              });
+          }
+        });
+
+        e.preventDefault();
+      });
+    });
+
+         });
+    </script>*@
+
